@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { authAPI, Token, UserCreate, UserOut } from "../services/api";
 import { toast } from "sonner";
@@ -81,11 +80,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const register = async (userData: UserCreate) => {
+  const register = async (userData: UserCreate): Promise<void> => {
     try {
-      const user = await authAPI.register(userData);
+      await authAPI.register(userData);
       toast.success("Registration successful! You can now log in.");
-      return user;
     } catch (error) {
       console.error("Registration failed:", error);
       toast.error("Registration failed. Please try again.");
